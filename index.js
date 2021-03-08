@@ -5,6 +5,11 @@ const fetchData = async (searchTerm) => {
       s: searchTerm,
     },
   });
+
+  if (response.data.Error) {
+    return [];
+  }
+
   return response.data.Search;
 };
 
@@ -13,12 +18,13 @@ const list = document.querySelector(".movies-list");
 
 const onInput = async (event) => {
   const movies = await fetchData(event.target.value);
+
   for (let movie of movies) {
     const li = document.createElement("li");
     li.innerHTML = `
-      <img src="${movie.Poster}"/>
-      <p>${movie.Title}</p>
-    `;
+        <img src="${movie.Poster}"/>
+        <p>${movie.Title}</p>
+      `;
     list.appendChild(li);
   }
 };
