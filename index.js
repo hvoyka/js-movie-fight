@@ -1,25 +1,29 @@
-
 const fetchData = async (searchTerm) => {
-  const response = await axios.get('http://www.omdbapi.com/',{
+  const response = await axios.get("http://www.omdbapi.com/", {
     params: {
-      apikey: 'b9a1a463',
-      s: searchTerm
-    }
+      apikey: "b9a1a463",
+      s: searchTerm,
+    },
   });
-  console.log(response.data)
-}
+  console.log(response.data);
+};
 
-const input = document.querySelector('input');
+const input = document.querySelector("input");
 
-let timeoutId;
+const debounce = (func, delay = 1000) => {
+  let timeoutId;
+  return (...args) => {
+    if (timeoutId) {
+      clearInterval(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      func.apply(null, args);
+    }, delay);
+  };
+};
 
-const onInput = event => {
-  if(timeoutId) {
-    clearTimeout(timeoutId);
-  }
-  timeoutId = setTimeout(()=>{
-    fetchData(event.target.value);
-  }, 500);
-}
+const onInput = (event) => {
+  fetchData(event.target.value);
+};
 
-input.addEventListener('input', onInput);
+input.addEventListener("input", debounce(onInput, 500));
