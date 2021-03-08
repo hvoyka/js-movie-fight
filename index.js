@@ -9,10 +9,18 @@ const fetchData = async (searchTerm) => {
 };
 
 const input = document.querySelector("input");
+const list = document.querySelector(".movies-list");
 
 const onInput = async (event) => {
   const movies = await fetchData(event.target.value);
-  console.log(movies);
+  for (let movie of movies) {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <img src="${movie.Poster}"/>
+      <p>${movie.Title}</p>
+    `;
+    list.appendChild(li);
+  }
 };
 
 input.addEventListener("input", debounce(onInput, 500));
