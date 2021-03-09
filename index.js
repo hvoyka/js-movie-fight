@@ -14,18 +14,19 @@ const fetchData = async (searchTerm) => {
 };
 
 const input = document.querySelector("input");
-const list = document.querySelector(".movies-list");
+const content = document.querySelector(".dropdown-content");
 
 const onInput = async (event) => {
   const movies = await fetchData(event.target.value);
 
   for (let movie of movies) {
-    const li = document.createElement("li");
-    li.innerHTML = `
+    const link = document.createElement("a");
+    link.classList.add("dropdown-item");
+    link.innerHTML = `
         <img src="${movie.Poster}"/>
         <p>${movie.Title}</p>
       `;
-    list.appendChild(li);
+    content.appendChild(link);
   }
 };
 
