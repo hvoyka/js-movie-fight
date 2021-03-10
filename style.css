@@ -35,7 +35,9 @@ figure .image img {
   display: flex;
   justify-content: space-around;
 }
-
+.dropdown.is-active {
+  display: flex;
+}
 .dropdown-item {
   display: flex;
   align-items: center;
