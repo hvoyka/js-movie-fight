@@ -12,8 +12,21 @@ const fetchData = async (searchTerm) => {
 
   return response.data.Search;
 };
+const root = document.querySelector("#root");
+root.innerHTML = `
+  <label><b>Search For A Movie</b></label>
+  <input type="text">
+  <div class="dropdown">
+    <div class="dropdown-menu">
+      <div class="dropdown-content results">
+      
+      </div>
+    </div>
+  </div>
+`;
 
 const input = document.querySelector("input");
+const dropdown = document.querySelector(".dropdown");
 const content = document.querySelector(".dropdown-content");
 
 const onInput = async (event) => {
@@ -28,6 +41,7 @@ const onInput = async (event) => {
       `;
     content.appendChild(link);
   }
+  dropdown.classList.add("is-active");
 };
 
 input.addEventListener("input", debounce(onInput, 500));
