@@ -44,3 +44,10 @@ const onInput = async (event) => {
 };
 
 input.addEventListener("input", debounce(onInput, 500));
+
+//close dropdown
+document.addEventListener("click", (event) => {
+  if (!root.contains(event.target)) {
+    dropdown.classList.remove("is-active");
+  }
+});
